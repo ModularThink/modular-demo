@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'login-url' => '/admin',
+    'login-url' => '/',
     'default-logged-route' => 'dashboard.index',
 ];

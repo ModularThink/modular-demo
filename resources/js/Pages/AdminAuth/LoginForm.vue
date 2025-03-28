@@ -91,8 +91,8 @@ import { useForm } from '@inertiajs/vue3'
 import useFormErrors from '@/Composables/useFormErrors'
 
 const form = useForm({
-    email: '',
-    password: '',
+    email: 'root@ismodular.com',
+    password: 'password',
     remember: false
 })
 
