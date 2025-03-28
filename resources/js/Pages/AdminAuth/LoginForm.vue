@@ -92,7 +92,7 @@ import useFormErrors from '@/Composables/useFormErrors'
 
 const form = useForm({
     email: 'root@ismodular.com',
-    password: 'password',
+    password: 'SuperSecretPassword123!@#',
     remember: false
 })
 
