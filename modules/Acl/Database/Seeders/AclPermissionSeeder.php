@@ -29,35 +29,53 @@ class AclPermissionSeeder extends Seeder
     private function getPermissions(): array
     {
         return [
-            // Main Menu
-            'Dashboard',
 
-            // Acl: Access Control List
-            'Acl',
-            'Acl: User - List',
-            'Acl: Permission - List',
-            'Acl: Role - List',
+            //Main Menu
+            '1' => 'Dashboard',
+            '2' => 'Blog',
+            '3' => 'Blog: Post - List',
+            '4' => 'Blog: Category - List',
+            '5' => 'Blog: Author - List',
+            '6' => 'Acl', //Acl: Access Control List
+            '7' => 'Acl: User - List',
+            '8' => 'Acl: Permission - List',
+            '9' => 'Acl: Role - List',
 
-            // User/UserIndex.vue
-            'Acl: User: Role - Edit',
-            'Acl: User: Permission - Edit',
-            'Acl: User - Create',
-            'Acl: User - Edit',
-            'Acl: User - Delete',
+            //BlogPost/PostIndex.vue
+            '10' => 'Blog: Post - Create',
+            '11' => 'Blog: Post - Edit',
+            '12' => 'Blog: Post - Delete',
 
-            // AclPermission/PermissionIndex.vue
-            'Acl: Permission - Create',
-            'Acl: Permission - Edit',
-            'Acl: Permission - Delete',
+            //BlogCategory/CategoryIndex.vue
+            '13' => 'Blog: Category - Create',
+            '14' => 'Blog: Category - Edit',
+            '15' => 'Blog: Category - Delete',
 
-            // AclRole/RoleIndex.vue
-            'Acl: Role - Create',
-            'Acl: Role - Edit',
-            'Acl: Role - Delete',
+            //BlogAuthor/AuthorIndex.vue
+            '16' => 'Blog: Author - Create',
+            '17' => 'Blog: Author - Edit',
+            '18' => 'Blog: Author - Delete',
 
-            // AclRolePermission/RolePermissionForm.vue
-            'Acl: Role: Permission - Edit',
+            //User/UserIndex.vue
+            '19' => 'Acl: User - Manage Roles',
+            '20' => 'Acl: User - Manage Permissions',
+            '21' => 'Acl: User - Create',
+            '22' => 'Acl: User - Edit',
+            '23' => 'Acl: User - Delete',
+
+            //AclPermission/PermissionIndex.vue
+            '24' => 'Acl: Permission - Create',
+            '25' => 'Acl: Permission - Edit',
+            '26' => 'Acl: Permission - Delete',
+
+            //AclRole/RoleIndex.vue
+            '27' => 'Acl: Role - Create',
+            '28' => 'Acl: Role - Edit',
+            '29' => 'Acl: Role - Delete',
+
+            //AclRolePermission/RolePermissionForm.vue
+            '30' => 'Acl: Role - Manage Permissions',
+
         ];
-
     }
 }

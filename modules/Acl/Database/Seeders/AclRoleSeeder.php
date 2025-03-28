@@ -19,6 +19,16 @@ class AclRoleSeeder extends Seeder
             'guard_name' => 'user',
         ]);
 
+        Role::create([
+            'name' => 'content author',
+            'guard_name' => 'user',
+        ]);
+
+        Role::create([
+            'name' => 'content director',
+            'guard_name' => 'user',
+        ]);
+
         Schema::enableForeignKeyConstraints();
     }
 }
