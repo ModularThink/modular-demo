@@ -1,7 +1,7 @@
 <template>
-    <div class="rounded-tl rounded-tr bg-skin-neutral-3 pb-3 pl-5 pt-5">
+    <div class="bg-neutral-3 rounded-tl rounded-tr pt-3 pb-4 pl-3">
         <label for="search" class="sr-only">Search</label>
-        <div class="flex items-center align-middle">
+        <div class="flex items-center pr-4 align-middle">
             <div class="pointer-events-none absolute flex items-center pl-3">
                 <i class="ri-search-line"></i>
             </div>
@@ -10,12 +10,12 @@
                 v-model="searchTerm"
                 :placeholder="__('Search')"
                 name="search"
-                class="!w-1/2 py-2 pl-9"
+                class="w-full py-2 pl-9 md:w-1/2"
             ></AppInputText>
 
             <AppButton
                 v-if="searchTerm"
-                class="btn btn-secondary btn-icon ml-2 border border-skin-primary-6"
+                class="btn border-neutral-8 bg-neutral-5 hover:bg-neutral-8 ml-2 border"
                 @click="clearSearch"
             >
                 <i class="ri-close-line"></i>

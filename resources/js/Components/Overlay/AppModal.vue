@@ -2,7 +2,7 @@
     <transition name="fade">
         <div v-show="isModalOpen" :class="backdropClasses" @click="hideModal">
             <div
-                class="mx-auto my-auto min-w-[360px] rounded-lg bg-skin-neutral-1 p-4 lg:w-1/3"
+                class="bg-neutral-2 text-neutral-11 mx-auto my-auto min-w-[360px] rounded-lg p-4 lg:w-1/3"
                 :class="[placementClass, 'absolute']"
                 @click.stop
             >
@@ -25,7 +25,7 @@ import { computed } from 'vue'
 const props = defineProps({
     backdropClasses: {
         type: String,
-        default: 'bg-skin-neutral-9 bg-opacity-75 fixed inset-0 z-50'
+        default: 'bg-neutral-12/50 fixed inset-0 z-50'
     },
     placement: {
         type: String,
@@ -70,6 +70,8 @@ function hideModal() {
 </script>
 
 <style scoped>
+@reference "../../../css/app.css";
+
 /* Fade Transition */
 .fade-enter-active,
 .fade-leave-active {

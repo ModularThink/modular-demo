@@ -5,7 +5,7 @@
     <AppCard>
         <template #title>
             {{ __('User Roles for') }}:
-            <span class="text-skin-primary-10">{{ user.name }}</span>
+            <span class="text-primary-10">{{ user.name }}</span>
         </template>
 
         <template #content>
@@ -28,7 +28,7 @@
                                 name="role"
                                 :value="role"
                             />
-                            <AppLabel :for="role.name" class="ml-3">
+                            <AppLabel :for="role.name" class="ml-2">
                                 {{ role.name }}
                             </AppLabel>
                         </div>

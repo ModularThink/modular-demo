@@ -87,6 +87,9 @@
 
     <AppPaginator
         :links="posts.links"
+        :from="posts.from || 0"
+        :to="posts.to || 0"
+        :total="posts.total || 0"
         class="mt-4 justify-center"
     ></AppPaginator>
 
@@ -100,8 +103,9 @@
 <script setup>
 import { ref } from 'vue'
 import useAuthCan from '@/Composables/useAuthCan'
+import AppImageNotAvailable from '@/Components/Modules/Blog/AppImageNotAvailable.vue'
 
-const props = defineProps({
+defineProps({
     posts: {
         type: Object,
         default: () => {}
@@ -128,11 +132,13 @@ const { can } = useAuthCan()
 </script>
 
 <style scoped>
+@reference "../../../css/app.css";
+
 .published {
-    @apply bg-skin-success-light  text-skin-success;
+    @apply bg-success-light text-success;
 }
 
 .draft {
-    @apply bg-skin-warning-light  text-skin-warning;
+    @apply bg-warning-light text-warning;
 }
 </style>

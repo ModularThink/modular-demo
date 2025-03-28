@@ -1,5 +1,5 @@
 <template>
-    <Link class="text-sm font-medium text-skin-primary-9 hover:underline">
+    <Link class="text-primary-9 text-sm font-medium hover:underline">
         <slot></slot>
     </Link>
 </template>

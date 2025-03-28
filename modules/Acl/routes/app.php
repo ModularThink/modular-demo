@@ -1,121 +1,109 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Acl\Http\Controllers\PermissionController;
+use Modules\Acl\Http\Controllers\RoleController;
+use Modules\Acl\Http\Controllers\RolePermissionController;
+use Modules\Acl\Http\Controllers\UserController;
+use Modules\Acl\Http\Controllers\UserPermissionController;
+use Modules\Acl\Http\Controllers\UserRoleController;
 
-//acl
+// acl
 Route::get('acl/get-user-roles-and-permissions', [
-    'uses' => 'UserController@getUserRolesAndPermissions',
+    UserController::class, 'getUserRolesAndPermissions',
 ]);
 
-//acl - permission
+// acl - permission
 Route::get('acl-permission', [
-    'uses' => 'PermissionController@index',
-])
-    ->name('aclPermission.index')
+    PermissionController::class, 'index',
+])->name('aclPermission.index')
     ->can('Acl: Permission - List');
 
 Route::get('acl-permission/create', [
-    'uses' => 'PermissionController@create',
-])
-    ->name('aclPermission.create')
+    PermissionController::class, 'create',
+])->name('aclPermission.create')
     ->can('Acl: Permission - Create');
 
 Route::post('acl-permission', [
-    'uses' => 'PermissionController@store',
-])
-    ->name('aclPermission.store')
+    PermissionController::class, 'store',
+])->name('aclPermission.store')
     ->can('Acl: Permission - Create');
 
 Route::get('acl-permission/{id}/edit', [
-    'uses' => 'PermissionController@edit',
-])
-    ->name('aclPermission.edit')
+    PermissionController::class, 'edit',
+])->name('aclPermission.edit')
     ->can('Acl: Permission - Edit');
 
 Route::put('acl-permission/{id}', [
-    'uses' => 'PermissionController@update',
-])
-    ->name('aclPermission.update')
+    PermissionController::class, 'update',
+])->name('aclPermission.update')
     ->can('Acl: Permission - Edit');
 
 Route::delete('acl-permission/{id}', [
-    'uses' => 'PermissionController@destroy',
-])
-    ->name('aclPermission.destroy')
+    PermissionController::class, 'destroy',
+])->name('aclPermission.destroy')
     ->can('Acl: Permission - Delete');
 
-//acl - role
+// acl - role
 Route::get('acl-role', [
-    'uses' => 'RoleController@index',
-])
-    ->name('aclRole.index')
+    RoleController::class, 'index',
+])->name('aclRole.index')
     ->can('Acl: Role - List');
 
 Route::get('acl-role/create', [
-    'uses' => 'RoleController@create',
-])
-    ->name('aclRole.create')
+    RoleController::class, 'create',
+])->name('aclRole.create')
     ->can('Acl: Role - Create');
 
 Route::post('acl-role', [
-    'uses' => 'RoleController@store',
-])
-    ->name('aclRole.store')
+    RoleController::class, 'store',
+])->name('aclRole.store')
     ->can('Acl: Role - Create');
 
 Route::get('acl-role/{id}/edit', [
-    'uses' => 'RoleController@edit',
-])
-    ->name('aclRole.edit')
+    RoleController::class, 'edit',
+])->name('aclRole.edit')
     ->can('Acl: Role - Edit');
 
 Route::put('acl-role/{id}', [
-    'uses' => 'RoleController@update',
-])
-    ->name('aclRole.update')
+    RoleController::class, 'update',
+])->name('aclRole.update')
     ->can('Acl: Role - Edit');
 
 Route::delete('acl-role/{id}', [
-    'uses' => 'RoleController@destroy',
-])
-    ->name('aclRole.destroy')
+    RoleController::class, 'destroy',
+])->name('aclRole.destroy')
     ->can('Acl: Role - Delete');
 
-//acl - role => permissions
+// acl - role => permissions
 Route::get('acl-role-permission/{id}/edit', [
-    'uses' => 'RolePermissionController@edit',
-])
-    ->name('aclRolePermission.edit')
-    ->can('Acl: Role - Manage Permissions');
+    RolePermissionController::class, 'edit',
+])->name('aclRolePermission.edit')
+    ->can('Acl: Role: Permission - Edit');
 
 Route::put('acl-role-permission/{id}', [
-    'uses' => 'RolePermissionController@update',
-])
-    ->name('aclRolePermission.update')
-    ->can('Acl: Role - Manage Permissions');
+    RolePermissionController::class, 'update',
+])->name('aclRolePermission.update')
+    ->can('Acl: Role: Permission - Edit');
 
-//acl - user role
+// acl - user role
 Route::get('acl-user-role/{id}/edit', [
-    'uses' => 'UserRoleController@edit',
-])
-    ->name('aclUserRole.edit')
-    ->can('Acl: User - Manage Roles');
+    UserRoleController::class, 'edit',
+])->name('aclUserRole.edit')
+    ->can('Acl: User: Role - Edit');
 
 Route::put('acl-user-role/{id}', [
-    'uses' => 'UserRoleController@update',
-])
-    ->name('aclUserRole.update')
-    ->can('Acl: User - Manage Roles');
+    UserRoleController::class, 'update',
+])->name('aclUserRole.update')
+    ->can('Acl: User: Role - Edit');
 
-//acl - user => permissions
+// acl - user => permissions
 Route::get('acl-user-permission/{id}/edit', [
-    'uses' => 'UserPermissionController@edit',
-])
-    ->name('aclUserPermission.edit')
-    ->can('Acl: User - Manage Permissions');
+    UserPermissionController::class, 'edit',
+])->name('aclUserPermission.edit')
+    ->can('Acl: User: Permission - Edit');
 
 Route::put('acl-user-permission/{id}', [
-    'uses' => 'UserPermissionController@update',
-])
-    ->name('aclUserPermission.update')
-    ->can('Acl: User - Manage Permissions');
+    UserPermissionController::class, 'update',
+])->name('aclUserPermission.update')
+    ->can('Acl: User: Permission - Edit');

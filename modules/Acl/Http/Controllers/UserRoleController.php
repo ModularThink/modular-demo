@@ -12,8 +12,7 @@ class UserRoleController extends BackendController
     {
         $user = User::with(['roles' => function ($q) {
             $q->get(['id', 'name']);
-        },
-        ])->findOrFail($id);
+        }])->findOrFail($id);
 
         $user->roles->map(function ($role) {
             unset($role->pivot);

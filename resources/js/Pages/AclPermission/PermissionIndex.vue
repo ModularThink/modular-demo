@@ -25,6 +25,10 @@
                     :key="item.id"
                 >
                     <AppDataTableData>
+                        {{ item.id }}
+                    </AppDataTableData>
+
+                    <AppDataTableData>
                         {{ item.name }}
                     </AppDataTableData>
 
@@ -33,7 +37,7 @@
                         <AppTooltip
                             v-if="can('Acl: Permission - Edit')"
                             :text="__('Edit Permission')"
-                            class="mr-3"
+                            class="mr-2"
                         >
                             <AppButton
                                 class="btn btn-icon btn-primary"
@@ -71,6 +75,9 @@
 
     <AppPaginator
         :links="permissions.links"
+        :from="permissions.from || 0"
+        :to="permissions.to || 0"
+        :total="permissions.total || 0"
         class="mt-4 justify-center"
     ></AppPaginator>
 
@@ -85,7 +92,9 @@
 import { ref } from 'vue'
 import useAuthCan from '@/Composables/useAuthCan'
 
-const props = defineProps({
+const { can } = useAuthCan()
+
+defineProps({
     permissions: {
         type: Object,
         default: () => {}
@@ -97,12 +106,10 @@ const breadCrumb = [
     { label: 'Permissions', last: true }
 ]
 
-const headers = ['Name', 'Actions']
+const headers = ['ID', 'Name', 'Actions']
 
 const confirmDialogRef = ref(null)
 const confirmDelete = (deleteRoute) => {
     confirmDialogRef.value.openModal(deleteRoute)
 }
-
-const { can } = useAuthCan()
 </script>

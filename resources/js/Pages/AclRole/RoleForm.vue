@@ -1,5 +1,6 @@
 <template>
-    <AppSectionHeader :title="__('Roles')" :bread-crumb="breadCrumb">
+    <Head :title="title"></Head>
+    <AppSectionHeader :title="title" :bread-crumb="breadCrumb">
     </AppSectionHeader>
 
     <AppCard class="w-full md:w-3/4 xl:w-1/2">
@@ -22,27 +23,21 @@
             </form>
         </template>
         <template #footer>
-            <AppButton
-                v-if="!role || role.id !== 1"
-                class="btn btn-primary"
-                @click="submitForm"
-            >
+            <AppButton class="btn btn-primary" @click="submitForm">
                 {{ __('Save') }}
             </AppButton>
-
-            <AppAlert v-else type="info" class="mb-4">
-                For demo purposes, the root role cannot be edited...
-            </AppAlert>
         </template>
     </AppCard>
 </template>
 
 <script setup>
 import { useForm } from '@inertiajs/vue3'
-
+import { Head } from '@inertiajs/vue3'
 import useTitle from '@/Composables/useTitle'
 import useFormContext from '@/Composables/useFormContext'
 import useFormErrors from '@/Composables/useFormErrors'
+
+const { title } = useTitle('Role')
 
 const props = defineProps({
     role: {
@@ -56,8 +51,6 @@ const breadCrumb = [
     { label: 'Roles', href: route('aclRole.index') },
     { label: 'Role', last: true }
 ]
-
-const { title } = useTitle('Role')
 
 const form = useForm({
     name: props.role ? props.role.name : ''

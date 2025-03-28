@@ -12,7 +12,7 @@ class UserPermissionController extends BackendController
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        $userPermissions = (new GetUserPermissions())->run($id);
+        $userPermissions = (new GetUserPermissions)->run($id);
 
         $permissions = Permission::orderBy('name')->get(['id', 'name']);
 

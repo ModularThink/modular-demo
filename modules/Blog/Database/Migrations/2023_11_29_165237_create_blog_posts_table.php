@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('blog_category_id')->nullable();
             $table->string('title');
             $table->string('slug')->unique();
+            $table->text('summary')->nullable();
             $table->longText('content');
             $table->string('image')->nullable();
             $table->string('meta_tag_title', 60)->nullable();

@@ -1,5 +1,12 @@
 <template>
     <AppSectionHeader title="Blogs" :bread-crumb="breadCrumb">
+        <AppButton
+            v-if="can(isCreate ? 'Blog: Post - Create' : 'Blog: Post - Edit')"
+            class="btn btn-primary mt-6"
+            @click="submitForm"
+        >
+            Save
+        </AppButton>
     </AppSectionHeader>
 
     <div class="flex flex-col xl:flex-row">
@@ -17,25 +24,32 @@
             </template>
         </AppCard>
 
-        <AppCard class="mt-4 w-full xl:ml-5 xl:mt-0 xl:w-4/12">
+        <AppCard class="mt-4 w-full xl:mt-0 xl:ml-5 xl:w-4/12">
             <template #title> Post Info </template>
             <template #content>
                 <PostPublishDate />
 
                 <PostCategory :categories="categories" />
 
+                <PostTags :tags="tags" />
+
                 <PostAuthor :authors="authors" />
             </template>
         </AppCard>
     </div>
 
-    <AppButton class="btn btn-primary mt-6" @click="submitForm">
+    <AppButton
+        v-if="can(isCreate ? 'Blog: Post - Create' : 'Blog: Post - Edit')"
+        class="btn btn-primary mt-6"
+        @click="submitForm"
+    >
         Save
     </AppButton>
 </template>
 
 <script setup>
 import { useForm } from '@inertiajs/vue3'
+import useAuthCan from '@/Composables/useAuthCan'
 
 import { onUnmounted } from 'vue'
 
@@ -46,9 +60,12 @@ import PostImage from './Components/PostImage.vue'
 import PostSeo from './Components/PostSeo.vue'
 import PostPublishDate from './Components/PostPublishDate.vue'
 import PostCategory from './Components/PostCategory.vue'
+import PostTags from './Components/PostTags.vue'
 import PostAuthor from './Components/PostAuthor.vue'
 import { usePostStore } from './PostStore'
+
 const postStore = usePostStore()
+const { can } = useAuthCan()
 
 const props = defineProps({
     post: {
@@ -57,6 +74,11 @@ const props = defineProps({
     },
 
     categories: {
+        type: Object,
+        default: () => {}
+    },
+
+    tags: {
         type: Object,
         default: () => {}
     },

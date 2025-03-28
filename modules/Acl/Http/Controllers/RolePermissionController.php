@@ -12,8 +12,7 @@ class RolePermissionController extends BackendController
     {
         $role = Role::with(['permissions' => function ($q) {
             $q->get(['id', 'name']);
-        },
-        ])->findOrFail($id);
+        }])->findOrFail($id);
 
         $role->permissions->map(function ($permission) {
             unset($permission->pivot);

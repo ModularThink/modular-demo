@@ -1,13 +1,15 @@
 <template>
     <span v-if="!item.href" class="opacity-50">{{ __(item.label) }}</span>
 
-    <Link v-if="item.href" :href="item.href">{{ __(item.label) }}</Link>
+    <Link v-if="item.href" :href="item.href" class="hover:underline">
+        {{ __(item.label) }}
+    </Link>
 
     <span v-if="!item.last"> > </span>
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
     item: {
         type: Object,
         default: () => {}

@@ -1,7 +1,7 @@
 <template>
     <div>
         <div
-            class="mx-0 mb-0 mt-1 flex flex-none flex-wrap items-center break-words rounded-t-md border-x border-t border-solid border-skin-neutral-7 bg-no-repeat p-2 font-sans text-xl leading-5 tracking-normal"
+            class="border-neutral-7 mx-0 mt-1 mb-0 flex flex-none flex-wrap items-center rounded-t-md border-x border-t border-solid bg-no-repeat p-2 font-sans text-xl leading-5 tracking-normal break-words"
             :class="editorClass"
         >
             <TipTapButton
@@ -152,7 +152,7 @@
 
         <div
             v-show="showTableToolbar"
-            class="mx-0 mb-0 flex flex-none flex-wrap items-center break-words border-x border-t border-solid border-skin-neutral-7 border-t-skin-neutral-7 bg-no-repeat p-2 font-sans text-xl leading-5 tracking-normal"
+            class="border-neutral-7 border-t-neutral-7 mx-0 mb-0 flex flex-none flex-wrap items-center border-x border-t border-solid bg-no-repeat p-2 font-sans text-xl leading-5 tracking-normal break-words"
         >
             <TipTapButton
                 :title="__('Insert Table')"
@@ -275,14 +275,14 @@
         <editor-content
             v-show="!codeMode"
             :editor="editor"
-            class="relative m-0 max-h-[240px] min-h-[120px] overflow-auto break-words rounded-b-md border border-solid border-skin-neutral-7 bg-no-repeat px-1 py-1 font-sans text-xs leading-5 tracking-normal"
+            class="border-neutral-7 relative m-0 max-h-[240px] min-h-[120px] overflow-auto rounded-b-md border border-solid bg-no-repeat px-1 py-1 font-sans text-xs leading-5 tracking-normal break-words"
         />
 
         <textarea
             v-show="codeMode"
             :id="editorId"
             v-model="htmlContent"
-            class="min-h-[240px] w-full rounded-b-md border border-solid border-skin-neutral-7 bg-skin-neutral-1 font-sans text-xs leading-5 tracking-normal"
+            class="border-neutral-7 bg-neutral-1 min-h-[240px] w-full rounded-b-md border border-solid font-sans text-xs leading-5 tracking-normal"
             @input="syncEditor"
         >
         </textarea>
@@ -328,10 +328,6 @@ const props = defineProps({
         default: 'image/*'
     }
 })
-
-const getEditorInstanceName = () => {
-    return 'editor-' + Math.random().toString(36).substring(2, 7) // Generates a random 5-character string
-}
 
 const codeMode = ref(false)
 const htmlContent = ref('')
@@ -448,7 +444,7 @@ const setLink = () => {
 }
 
 const addVideo = () => {
-    const url = prompt('Enter YouTube URL')
+    const url = window.prompt('Enter YouTube URL')
 
     if (!url) {
         return
@@ -463,15 +459,17 @@ const addVideo = () => {
 </script>
 
 <style>
+@reference "../../../css/app.css";
+
 .app-tip-tap-error {
-    border: 1px solid theme('colors.skin.error.DEFAULT');
+    border: 1px solid theme('colors.error.DEFAULT');
     border-radius: 3px;
 }
 
 .ProseMirror {
     min-height: 120px;
     padding: 5px 10px;
-    background-color: theme('colors.skin.neutral.1');
+    background-color: theme('colors.neutral.1');
 }
 
 .ProseMirror p {
@@ -480,7 +478,7 @@ const addVideo = () => {
 
 .ProseMirror a {
     text-decoration: underline;
-    color: theme('colors.skin.primary.11');
+    color: theme('colors.primary.11');
 }
 
 /* Heading Sizes, See: https://tailwindcss.com/docs/font-size */
@@ -532,7 +530,7 @@ const addVideo = () => {
 .ProseMirror table td,
 .ProseMirror table th {
     min-width: 1em;
-    border: 2px solid theme('colors.skin.neutral.6');
+    border: 2px solid theme('colors.neutral.6');
     padding: 3px 5px;
     vertical-align: top;
     box-sizing: border-box;
@@ -546,7 +544,7 @@ const addVideo = () => {
 .ProseMirror th {
     font-weight: bold;
     text-align: left;
-    background-color: theme('colors.skin.neutral.2');
+    background-color: theme('colors.neutral.2');
 }
 
 .ProseMirror .selectedCell:after {
@@ -567,7 +565,7 @@ const addVideo = () => {
     top: 0;
     bottom: -2px;
     width: 4px;
-    background-color: theme('colors.skin.neutral.3');
+    background-color: theme('colors.neutral.3');
     pointer-events: none;
 }
 

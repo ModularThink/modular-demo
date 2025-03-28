@@ -15,6 +15,7 @@ class BlogServiceProvider extends BaseServiceProvider
         parent::boot();
 
         $this->loadMigrationsFrom(__DIR__.'/Database/Migrations');
+        $this->loadViewsFrom(__DIR__.'/views', 'blog');
 
         Post::observe(PostObserver::class);
     }

@@ -6,7 +6,7 @@
                 <span class="">{{ message }}</span>
             </div>
             <AppButton
-                class="text-skin-neutral-3 hover:text-skin-neutral-4"
+                class="text-neutral-3 hover:text-neutral-4"
                 @click="closeToast"
             >
                 <i class="ri-close-circle-line text-lg"></i>
@@ -70,15 +70,17 @@ const closeToast = () => {
 </script>
 
 <style scoped>
+@reference "../../../css/app.css";
+
 .alert {
     @apply flex w-80 justify-between rounded-lg px-4 py-3 align-middle shadow;
 }
 
 .success {
-    @apply bg-skin-success text-skin-success-light;
+    @apply bg-success text-success-light;
 }
 
 .error {
-    @apply bg-skin-error text-skin-error-light;
+    @apply bg-error text-error-light;
 }
 </style>

@@ -1,5 +1,6 @@
 <template>
-    <AppSectionHeader :title="__('Users')" :bread-crumb="breadCrumb">
+    <Head :title="title"></Head>
+    <AppSectionHeader :title="title" :bread-crumb="breadCrumb">
     </AppSectionHeader>
 
     <AppCard class="w-full md:w-3/4 xl:w-1/2">
@@ -41,32 +42,27 @@
                         :class="{
                             'input-error': errorsFields.includes('password')
                         }"
+                        autocomplete="off"
                     />
                 </div>
             </form>
         </template>
         <template #footer>
-            <AppButton
-                v-if="!user || user.id !== 1"
-                class="btn btn-primary"
-                @click="submitForm"
-            >
+            <AppButton class="btn btn-primary" @click="submitForm">
                 {{ __('Save') }}
             </AppButton>
-
-            <AppAlert v-else type="info" class="mb-4">
-                For demo purposes, the example user cannot be edited...
-            </AppAlert>
         </template>
     </AppCard>
 </template>
 
 <script setup>
 import { useForm } from '@inertiajs/vue3'
-
+import { Head } from '@inertiajs/vue3'
 import useTitle from '@/Composables/useTitle'
 import useFormContext from '@/Composables/useFormContext'
 import useFormErrors from '@/Composables/useFormErrors'
+
+const { title } = useTitle('User')
 
 const props = defineProps({
     user: {
@@ -80,8 +76,6 @@ const breadCrumb = [
     { label: 'Users', href: route('user.index') },
     { label: 'User', last: true }
 ]
-
-const { title } = useTitle('User')
 
 const form = useForm({
     name: props.user ? props.user.name : '',
@@ -101,9 +95,3 @@ const submitForm = () => {
 
 const { errorsFields } = useFormErrors()
 </script>
-
-<!-- <style scoped>
-.p-card::v-deep(.p-card-footer) {
-  padding-top: 0;
-}
-</style> -->

@@ -5,7 +5,7 @@
     <AppCard>
         <template #title>
             {{ __('User Permissions for') }}:
-            <span class="text-skin-primary-10">{{ user.name }}</span>
+            <span class="text-primary-10">{{ user.name }}</span>
         </template>
 
         <template #content>
@@ -28,7 +28,7 @@
                                 name="permission"
                                 :value="permission"
                             />
-                            <AppLabel :for="permission.name" class="ml-3">
+                            <AppLabel :for="permission.name" class="ml-2">
                                 {{ permission.name }}
                             </AppLabel>
                         </div>

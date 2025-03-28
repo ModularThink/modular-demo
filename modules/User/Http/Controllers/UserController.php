@@ -50,13 +50,6 @@ class UserController extends BackendController
 
     public function update(UserValidate $request, $id)
     {
-
-        //prevent update of the example user
-        if ($id == 1) {
-            return redirect()->route('user.index')
-                ->with('error', 'User not updated');
-        }
-
         $user = User::findOrFail($id);
 
         $params = $request->validated();
@@ -73,12 +66,6 @@ class UserController extends BackendController
 
     public function destroy($id)
     {
-        //prevent delete of the example user
-        if ($id == 1) {
-            return redirect()->route('user.index')
-                ->with('error', 'User not deleted');
-        }
-
         User::findOrFail($id)->delete();
 
         return redirect()->route('user.index')

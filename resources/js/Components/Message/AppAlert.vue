@@ -29,23 +29,25 @@ const iconClass = computed(() => {
 </script>
 
 <style scoped>
+@reference "../../../css/app.css";
+
 .alert {
     @apply flex w-full rounded-lg px-4 py-3 align-middle shadow;
 }
 
 .info {
-    @apply bg-skin-info-light text-skin-info;
+    @apply bg-info-light text-info;
 }
 
 .success {
-    @apply bg-skin-success-light text-skin-success;
+    @apply bg-success-light text-success;
 }
 
 .warning {
-    @apply bg-skin-warning-light text-skin-warning;
+    @apply bg-warning-light text-warning;
 }
 
 .error {
-    @apply bg-skin-error-light text-skin-error;
+    @apply bg-error-light text-error;
 }
 </style>

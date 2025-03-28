@@ -22,6 +22,10 @@
             <tbody>
                 <AppDataTableRow v-for="item in users.data" :key="item.id">
                     <AppDataTableData>
+                        {{ item.id }}
+                    </AppDataTableData>
+
+                    <AppDataTableData>
                         {{ item.name }}
                     </AppDataTableData>
 
@@ -32,9 +36,9 @@
                     <AppDataTableData>
                         <!-- edit user roles -->
                         <AppTooltip
-                            v-if="can('Acl: User - Manage Roles')"
+                            v-if="can('Acl: User: Role - Edit')"
                             :text="__('User Roles')"
-                            class="mr-3"
+                            class="mr-2"
                         >
                             <AppButton
                                 class="btn btn-icon btn-primary"
@@ -50,9 +54,9 @@
 
                         <!-- edit user permissions -->
                         <AppTooltip
-                            v-if="can('Acl: User - Manage Permissions')"
+                            v-if="can('Acl: User: Permission - Edit')"
                             :text="__('User Permissions')"
-                            class="mr-3"
+                            class="mr-2"
                         >
                             <AppButton
                                 class="btn btn-icon btn-primary"
@@ -70,7 +74,7 @@
                         <AppTooltip
                             v-if="can('Acl: User - Edit')"
                             :text="__('Edit User')"
-                            class="mr-3"
+                            class="mr-2"
                         >
                             <AppButton
                                 class="btn btn-icon btn-primary"
@@ -89,7 +93,11 @@
                         >
                             <AppButton
                                 class="btn btn-icon btn-destructive"
-                                @click="validateUserDeletion(item.id)"
+                                @click="
+                                    confirmDelete(
+                                        route('user.destroy', item.id)
+                                    )
+                                "
                             >
                                 <i class="ri-delete-bin-line"></i>
                             </AppButton>
@@ -102,6 +110,9 @@
 
     <AppPaginator
         :links="users.links"
+        :from="users.from || 0"
+        :to="users.to || 0"
+        :total="users.total || 0"
         class="mt-4 justify-center"
     ></AppPaginator>
 
@@ -110,19 +121,15 @@
     </AppAlert>
 
     <AppConfirmDialog ref="confirmDialogRef"></AppConfirmDialog>
-
-    <AppToast ref="toastRef">
-        <AppAlert type="error" class="mb-4">
-            It's a demo, please don't delete the example user...
-        </AppAlert>
-    </AppToast>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import useAuthCan from '@/Composables/useAuthCan'
 
-const props = defineProps({
+const { can } = useAuthCan()
+
+defineProps({
     users: {
         type: Object,
         default: () => {}
@@ -134,22 +141,10 @@ const breadCrumb = [
     { label: 'Users', last: true }
 ]
 
-const headers = ['Name', 'Email', 'Actions']
+const headers = ['ID', 'Name', 'Email', 'Actions']
 
 const confirmDialogRef = ref(null)
 const confirmDelete = (deleteRoute) => {
     confirmDialogRef.value.openModal(deleteRoute)
 }
-
-const toastRef = ref(null)
-const validateUserDeletion = (userId) => {
-    //example user, should not be deleted
-    if (userId === 1) {
-        toastRef.value.open()
-    } else {
-        confirmDelete(route('user.destroy', userId))
-    }
-}
-
-const { can } = useAuthCan()
 </script>

@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Blog\Database\Factories\BlogPostFactory;
 use Modules\Support\Models\BaseModel;
@@ -21,6 +22,15 @@ class Post extends BaseModel
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
 
     protected $appends = ['image_url'];
+
+    protected $casts = [
+        'published_at' => 'datetime:Y-m-d',
+    ];
+
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class, 'blog_posts_tags', 'blog_post_id', 'blog_tag_id');
+    }
 
     public function sluggable(): array
     {
@@ -52,5 +62,10 @@ class Post extends BaseModel
     protected static function newFactory(): Factory
     {
         return BlogPostFactory::new();
+    }
+
+    public function author()
+    {
+        return $this->belongsTo(Author::class, 'blog_author_id');
     }
 }

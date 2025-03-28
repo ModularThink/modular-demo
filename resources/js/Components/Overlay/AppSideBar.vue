@@ -2,7 +2,7 @@
     <div :class="baseClasses" :aria-hidden="!isVisible.toString()">
         <!-- Your Sidebar Content -->
         <div
-            class="fixed z-40 h-screen w-64 overflow-y-auto bg-skin-neutral-2 shadow"
+            class="bg-neutral-2 fixed z-40 h-screen w-64 overflow-y-auto shadow-sm"
         >
             <aside aria-label="Sidebar">
                 <div class="h-full overflow-y-auto px-3 py-5">
@@ -13,7 +13,7 @@
         <transition name="fade">
             <div
                 v-if="backdrop && isVisible"
-                class="fixed inset-0 bg-skin-neutral-9 opacity-95"
+                class="bg-neutral-9 fixed inset-0 opacity-95"
                 @click="$emit('sidebar:toggle')"
             ></div>
         </transition>
@@ -124,12 +124,17 @@ defineExpose({
 </script>
 
 <style scoped>
+/* @reference "tailwindcss/theme"; */
+@reference "../../../css/app.css";
+
 .fade-enter-active,
 .fade-leave-active {
-    @apply transition-opacity duration-300 ease-in;
+    transition-property: opacity;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in;
 }
 .fade-enter-from,
 .fade-leave-to {
-    @apply opacity-0;
+    opacity: 0;
 }
 </style>

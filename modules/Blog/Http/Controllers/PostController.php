@@ -6,8 +6,10 @@ use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
 use Modules\Blog\Http\Requests\PostValidate;
 use Modules\Blog\Models\Post;
-use Modules\Blog\Services\AuthorService;
-use Modules\Blog\Services\CategoryService;
+use Modules\Blog\Services\GetAuthorOptions;
+use Modules\Blog\Services\GetCategoryOptions;
+use Modules\Blog\Services\GetTagOptions;
+use Modules\Blog\Services\SyncPostTags;
 use Modules\Support\Http\Controllers\BackendController;
 use Modules\Support\Traits\EditorImage;
 use Modules\Support\Traits\UploadFile;
@@ -16,7 +18,7 @@ class PostController extends BackendController
 {
     use EditorImage, UploadFile;
 
-    protected string $uploadImagePath = 'storage/app/public/blog';
+    protected string $uploadImagePath = 'blog';
 
     public function index(): Response
     {
@@ -36,15 +38,16 @@ class PostController extends BackendController
         ]);
     }
 
-    public function create(CategoryService $categoryService, AuthorService $authorService): Response
+    public function create(GetCategoryOptions $getCategoryOptions, GetTagOptions $getTagOptions, GetAuthorOptions $getAuthorOptions): Response
     {
         return inertia('BlogPost/PostForm', [
-            'categories' => $categoryService->get(),
-            'authors' => $authorService->get(),
+            'categories' => $getCategoryOptions->get(),
+            'tags' => $getTagOptions->get(),
+            'authors' => $getAuthorOptions->get(),
         ]);
     }
 
-    public function store(PostValidate $request): RedirectResponse
+    public function store(PostValidate $request, SyncPostTags $syncPostTags): RedirectResponse
     {
         $postData = $request->validated();
 
@@ -52,22 +55,29 @@ class PostController extends BackendController
             $postData = array_merge($postData, $this->uploadFile('image', 'blog', 'originalUUID', 'public'));
         }
 
-        Post::create($postData);
+        $post = Post::create($postData);
+
+        if (is_array($request->input('tags')) and count($request->input('tags'))) {
+            $syncPostTags->sync($post, $request->input('tags'));
+        }
 
         return redirect()->route('blogPost.index')
             ->with('success', 'Post created.');
     }
 
-    public function edit(CategoryService $categoryService, AuthorService $authorService, int $id): Response
+    public function edit(GetCategoryOptions $getCategoryOptions, GetTagOptions $getTagOptions, GetAuthorOptions $getAuthorOptions, int $id): Response
     {
         return inertia('BlogPost/PostForm', [
-            'post' => Post::find($id),
-            'categories' => $categoryService->get(),
-            'authors' => $authorService->get(),
+            'post' => Post::with(['tags' => function ($query) {
+                $query->select('blog_tags.id', 'blog_tags.name');
+            }])->find($id),
+            'categories' => $getCategoryOptions->get(),
+            'tags' => $getTagOptions->get(),
+            'authors' => $getAuthorOptions->get(),
         ]);
     }
 
-    public function update(PostValidate $request, int $id): RedirectResponse
+    public function update(PostValidate $request, SyncPostTags $syncPostTags, int $id): RedirectResponse
     {
 
         $post = Post::findOrFail($id);
@@ -83,6 +93,10 @@ class PostController extends BackendController
         }
 
         $post->update($postData);
+
+        if ($request->has('tagsHasChanged')) {
+            $syncPostTags->sync($post, $request->input('tags'));
+        }
 
         return redirect()->route('blogPost.index')
             ->with('success', 'Post updated.');

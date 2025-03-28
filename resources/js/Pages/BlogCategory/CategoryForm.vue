@@ -29,12 +29,12 @@ import { useForm } from '@inertiajs/vue3'
 import { onUnmounted } from 'vue'
 import useTitle from '@/Composables/useTitle'
 import useFormContext from '@/Composables/useFormContext'
-import useFormErrors from '@/Composables/useFormErrors'
 import CategoryBody from './Components/CategoryBody.vue'
 import CategoryImage from './Components/CategoryImage.vue'
 import CategorySeo from './Components/CategorySeo.vue'
 import CategoryVisibility from './Components/CategoryVisibility.vue'
 import { useCategoryStore } from './CategoryStore'
+
 const categoryStore = useCategoryStore()
 
 const props = defineProps({
@@ -73,6 +73,4 @@ const submitForm = () => {
         })).post(route('blogCategory.update', props.category.id))
     }
 }
-
-const { errorsFields } = useFormErrors()
 </script>

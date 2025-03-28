@@ -3,21 +3,17 @@
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Inertia\Testing\AssertableInertia as Assert;
 use Modules\User\Models\User;
-use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 uses(TestCase::class, RefreshDatabase::class);
 
 beforeEach(function () {
-    $this->user = User::factory()->create(['name' => 'Alpha']);
-    Role::create(['name' => 'root']);
-    $this->user->assignRole('root');
-
+    $this->user = User::factory()->create();
     $this->loggedRequest = $this->actingAs($this->user);
 });
 
 test('user list can be rendered', function () {
-    $response = $this->loggedRequest->get('/user');
+    $response = $this->loggedRequest->get('/admin/user');
 
     $response->assertStatus(200);
 
@@ -37,7 +33,7 @@ test('user list can be rendered', function () {
 });
 
 test('user can be created', function () {
-    $response = $this->loggedRequest->post('/user', [
+    $response = $this->loggedRequest->post('/admin/user', [
         'name' => 'New Name',
         'email' => 'new@email.com',
         'password' => 'password',
@@ -45,13 +41,13 @@ test('user can be created', function () {
 
     $users = User::all();
 
-    $response->assertRedirect('/user');
+    $response->assertRedirect('/admin/user');
     $this->assertCount(2, $users);
     $this->assertEquals('New Name', $users->last()->name);
 });
 
 test('user edit can be rendered', function () {
-    $response = $this->loggedRequest->get('/user/'.$this->user->id.'/edit');
+    $response = $this->loggedRequest->get('/admin/user/'.$this->user->id.'/edit');
 
     $response->assertStatus(200);
 
@@ -69,39 +65,34 @@ test('user edit can be rendered', function () {
 });
 
 test('user can be updated', function () {
-
-    $user2 = User::factory()->create(['name' => 'Beta']);
-
-    $response = $this->loggedRequest->put('/user/'.$user2->id, [
+    $response = $this->loggedRequest->put('/admin/user/'.$this->user->id, [
         'name' => 'New Name',
         'email' => 'new@email.com',
         'password' => 'password',
     ]);
 
-    $response->assertRedirect('/user');
+    $response->assertRedirect('/admin/user');
 
-    $redirectResponse = $this->loggedRequest->get('/user');
+    $redirectResponse = $this->loggedRequest->get('/admin/user');
     $redirectResponse->assertInertia(
         fn (Assert $page) => $page
             ->component('User/UserIndex')
             ->has(
-                'users.data.1',
+                'users.data',
+                1,
                 fn (Assert $page) => $page
-                    ->where('id', $user2->id)
+                    ->where('id', $this->user->id)
                     ->where('name', 'New Name')
                     ->where('email', 'new@email.com')
-                    ->where('created_at', $user2->created_at->format('d/m/Y H:i\h'))
+                    ->where('created_at', $this->user->created_at->format('d/m/Y H:i\h'))
             )
     );
-
-    $user2->delete();
 });
 
 test('user can be deleted', function () {
-    $user2 = User::factory()->create();
-    $response = $this->loggedRequest->delete('/user/'.$user2->id);
+    $response = $this->loggedRequest->delete('/admin/user/'.$this->user->id);
 
-    $response->assertRedirect('/user');
+    $response->assertRedirect('/admin/user');
 
-    $this->assertCount(1, User::all());
+    $this->assertCount(0, User::all());
 });

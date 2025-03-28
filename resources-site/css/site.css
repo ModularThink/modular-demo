@@ -1,0 +1,137 @@
+@import 'tailwindcss';
+@config "../../tailwind.config.mjs";
+@import './blog.css';
+
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+
+    :root {
+        --color-primary-1: oklch(99.43% 0.0013 286.38); /* #fdfdfe */
+        --color-primary-2: oklch(
+            98.5% 0.006973967373672813 268.54888172949575
+        ); /* #f8faff */
+        --color-primary-3: oklch(96.73% 0.0153 269.99); /* #f0f4ff */
+        --color-primary-4: oklch(94.59% 0.0241 267.93); /* #e6edfe */
+        --color-primary-5: oklch(91.4% 0.0368 270.46); /* #d9e2fc */
+        --color-primary-6: oklch(87.13% 0.0536 268.92); /* #c6d4f9 */
+        --color-primary-7: oklch(81.27% 0.0777 270.03); /* #aec0f5 */
+        --color-primary-8: oklch(73.09% 0.1123 270.43); /* #8da4ef */
+        --color-primary-9: oklch(54.38% 0.191 267.01); /* #3e63dd */
+        --color-primary-10: oklch(51.51% 0.178 267.1); /* #3a5ccc */
+        --color-primary-11: oklch(46.99% 0.158 267.41); /* #3451b2 */
+        --color-primary-12: oklch(31.26% 0.0858 268.6); /* #1f2d5c */
+
+        /* 1 - App background, 2 - Subtle background */
+        --color-neutral-1: oklch(99.13% 0.0013 286.38); /* #fcfcfd */
+        --color-neutral-2: oklch(98.27% 0.0026 286.35); /* #f9f9fb */
+
+        /* 3 - UI element background, 4 - Hovered UI element background, 5 - Active / Selected UI element background */
+        --color-neutral-3: oklch(96.2% 0.004 286.32); /* #f2f2f5 */
+        --color-neutral-4: oklch(94.12% 0.0053 286.3); /* #ebebef */
+        --color-neutral-5: oklch(92.03% 0.0067 286.27); /* #e4e4e9 */
+
+        /* 6 - Subtle borders and separators, 7 - UI element border and focus rings, 8 - Hovered UI element border */
+        --color-neutral-6: oklch(89.93% 0.0081 286.24); /* #dddde3 */
+        --color-neutral-7: oklch(87.12% 0.0096 279.67); /* #d3d4db */
+        --color-neutral-8: oklch(79.38% 0.0156 277.79); /* #b9bbc6 */
+
+        /* 9 - Solid backgrounds, 10 - Hovered solid backgrounds */
+        --color-neutral-9: oklch(64.53% 0.0165 277.7); /* #8b8d98 */
+        --color-neutral-10: oklch(60.15% 0.0153 276.9); /* #7e808a */
+
+        /* 11 - Low-contrast text, 12 - High-contrast text */
+        --color-neutral-11: oklch(50.25% 0.0136 264.44); /* #60646c */
+        --color-neutral-12: oklch(24.11% 0.0097 248.23); /* #1c2024 */
+
+        /* Semantic Colors */
+        --color-info: oklch(64.93% 0.1929 251.78); /* #0090ff 9*/
+        --color-info-dark: oklch(62.23% 0.1831 251.7); /* #0588f0 10*/
+        --color-info-light: oklch(95.97% 0.0201 238.66); /* #e6f4fe 3*/
+
+        --color-success: oklch(64.06% 0.1329 157.68); /* #30a46c 9*/
+        --color-success-dark: oklch(61.15% 0.1266 158.23); /* #2b9a66 10*/
+        --color-success-light: oklch(95.82% 0.0223 155.92); /* #e6f6eb 3*/
+
+        --color-warning: oklch(
+            56.91% 0.11915678603564026 76.80992661960202
+        ); /* #9e6c00 11*/
+        --color-warning-dark: oklch(35.78% 0.0461 86.88); /* #473b1f 12*/
+        --color-warning-light: oklch(97.35% 0.0838 104.2); /* #fffab8 3*/
+
+        --color-error: oklch(62.56% 0.1933 23.03); /* #e5484d 9*/
+        --color-error-dark: oklch(59.9% 0.1947 24.04); /* #dc3e42 10*/
+        --color-error-light: oklch(95.55% 0.0207 13.86); /* #feebec 3*/
+    }
+
+    html {
+        @apply bg-neutral-1 text-neutral-12;
+    }
+}
+
+@utility input-error {
+    @apply ring-error!;
+}
+
+@theme {
+    --color-primary-1: var(--color-primary-1);
+    --color-primary-2: var(--color-primary-2);
+    --color-primary-3: var(--color-primary-3);
+    --color-primary-4: var(--color-primary-4);
+    --color-primary-5: var(--color-primary-5);
+    --color-primary-6: var(--color-primary-6);
+    --color-primary-7: var(--color-primary-7);
+    --color-primary-8: var(--color-primary-8);
+    --color-primary-9: var(--color-primary-9);
+    --color-primary-10: var(--color-primary-10);
+    --color-primary-11: var(--color-primary-11);
+    --color-primary-12: var(--color-primary-12);
+
+    /* 1 - App background, 2 - Subtle background */
+    --color-neutral-1: var(--color-neutral-1);
+    --color-neutral-2: var(--color-neutral-2);
+
+    /* 3 - UI element background, 4 - Hovered UI element background, 5 - Active / Selected UI element background */
+    --color-neutral-3: var(--color-neutral-3);
+    --color-neutral-4: var(--color-neutral-4);
+    --color-neutral-5: var(--color-neutral-5);
+
+    /* 6 - Subtle borders and separators, 7 - UI element border and focus rings, 8 - Hovered UI element border */
+    --color-neutral-6: var(--color-neutral-6);
+    --color-neutral-7: var(--color-neutral-7);
+    --color-neutral-8: var(--color-neutral-8);
+
+    /* 9 - Solid backgrounds, 10 - Hovered solid backgrounds */
+    --color-neutral-9: var(--color-neutral-9);
+    --color-neutral-10: var(--color-neutral-10);
+
+    /* 11 - Low-contrast text, 12 - High-contrast text */
+    --color-neutral-11: var(--color-neutral-11);
+    --color-neutral-12: var(--color-neutral-12);
+
+    /* Semantic Colors */
+    --color-info: var(--color-info);
+    --color-info-dark: var(--color-info-dark);
+    --color-info-light: var(--color-info-light);
+
+    --color-success: var(--color-success);
+    --color-success-dark: var(--color-success-dark);
+    --color-success-light: var(--color-success-light);
+
+    --color-warning: var(--color-warning);
+    --color-warning-dark: var(--color-warning-dark);
+    --color-warning-light: var(--color-warning-light);
+
+    --color-error: var(--color-error);
+    --color-error-dark: var(--color-error-dark);
+    --color-error-light: var(--color-error-light);
+}
+
+#nprogress .bar {
+    height: 0.3125em !important;
+}

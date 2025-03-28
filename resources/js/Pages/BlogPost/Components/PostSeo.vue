@@ -5,7 +5,7 @@
 
             <a
                 href="#"
-                class="text-sm text-skin-primary-9 hover:underline"
+                class="text-primary-9 text-sm hover:underline"
                 @click.prevent="toggleSeoForm"
             >
                 Edit SEO content
@@ -14,21 +14,21 @@
 
         <small
             v-show="postStore.showSeoAlert()"
-            class="block text-sm text-skin-neutral-9"
+            class="text-neutral-9 block text-sm"
         >
             (fill the title and description to see a preview)
         </small>
 
         <template v-if="showSeoForm">
             <div>
-                <div class="mb-2 mt-2 flex items-center">
+                <div class="mt-2 mb-2 flex items-center">
                     <div
-                        class="mr-4 flex h-10 w-10 rounded-full bg-gradient-to-bl from-skin-neutral-3 to-skin-neutral-6"
+                        class="from-neutral-3 to-neutral-6 mr-4 flex h-10 w-10 rounded-full bg-gradient-to-bl"
                     ></div>
 
                     <div class="flex flex-col items-start">
                         <p class="text-sm">Your Site Name</p>
-                        <p class="-mt-1 text-sm text-skin-neutral-10">
+                        <p class="text-neutral-10 -mt-1 text-sm">
                             https://your-domain.com/blog/post/{{
                                 postStore.getSlug()
                             }}
@@ -37,7 +37,7 @@
                 </div>
 
                 <div>
-                    <p class="text-2xl text-skin-primary-11">
+                    <p class="text-primary-11 text-2xl">
                         {{ postStore.post.meta_tag_title }}
                     </p>
 
@@ -58,7 +58,7 @@
                         'input-error': errorsFields.includes('meta_tag_title')
                     }"
                 />
-                <small class="block text-right text-skin-neutral-9">
+                <small class="text-neutral-9 block text-right">
                     {{ postStore.getRemainingChars('meta_tag_title', 60) }}
                     of 60
                 </small>
@@ -79,7 +79,7 @@
                         )
                     }"
                 />
-                <small class="block text-right text-skin-neutral-9">
+                <small class="text-neutral-9 block text-right">
                     {{
                         postStore.getRemainingChars('meta_tag_description', 160)
                     }}

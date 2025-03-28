@@ -18,6 +18,7 @@ class BlogPostFactory extends Factory
             'title' => $title,
             'slug' => Str::slug($title),
             'content' => $this->faker->realText(),
+            'summary' => $this->faker->realText(100),
             'image' => $this->faker->imageUrl(),
             'meta_tag_title' => Str::limit($title, 60, ''),
             'meta_tag_description' => Str::limit($title, 160, ''),

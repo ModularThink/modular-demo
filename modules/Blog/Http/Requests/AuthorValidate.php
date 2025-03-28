@@ -18,7 +18,7 @@ class AuthorValidate extends Request
                 'max:255',
                 Rule::unique('blog_authors', 'email')->ignore(request('id')),
             ],
-            'image' => 'nullable|image|max:2048', //Max size 2MB
+            'image' => 'nullable|image|max:2048', // Max size 2MB
             'bio' => 'nullable|string',
             'github_handle' => 'nullable|string|max:255',
             'twitter_handle' => 'nullable|string|max:255',

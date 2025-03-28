@@ -7,7 +7,6 @@ use Tests\TestCase;
 uses(TestCase::class, RefreshDatabase::class);
 
 test('login screen can be rendered', function () {
-
     $loginRoute = config('modular.login-url');
 
     $response = $this->get($loginRoute);
@@ -24,7 +23,7 @@ test('users can authenticate using the login screen', function () {
     ]);
 
     $this->assertAuthenticated();
-    $response->assertRedirect('/dashboard');
+    $response->assertRedirect('/admin/dashboard');
 });
 
 test('users can not authenticate with invalid password', function () {

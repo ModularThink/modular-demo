@@ -8,6 +8,8 @@ export const usePostStore = defineStore('PostStore', {
                 blog_category_id: null,
                 blog_author_id: null,
 
+                tags: [],
+
                 title: '',
                 content: '',
                 image: null,
@@ -17,7 +19,9 @@ export const usePostStore = defineStore('PostStore', {
 
                 published_at: '',
 
-                remove_previous_image: false
+                remove_previous_image: false,
+
+                tagsHasChanged: false
             }
         }
     },

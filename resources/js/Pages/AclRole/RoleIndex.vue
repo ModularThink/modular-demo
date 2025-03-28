@@ -2,7 +2,7 @@
     <AppSectionHeader :title="__('Roles')" :bread-crumb="breadCrumb">
         <template #right>
             <AppButton
-                v-if="can('ACL: Role - Create')"
+                v-if="can('Acl: Role - Create')"
                 class="btn btn-primary"
                 @click="$inertia.visit(route('aclRole.create'))"
             >
@@ -22,15 +22,19 @@
             <tbody>
                 <AppDataTableRow v-for="item in roles.data" :key="item.id">
                     <AppDataTableData>
+                        {{ item.id }}
+                    </AppDataTableData>
+
+                    <AppDataTableData>
                         {{ item.name }}
                     </AppDataTableData>
 
                     <AppDataTableData>
                         <!-- role permissions -->
                         <AppTooltip
-                            v-if="can('Acl: Role - Manage Permissions')"
+                            v-if="can('Acl: Role: Permission - Edit')"
                             :text="__('Role Permissions')"
-                            class="mr-3"
+                            class="mr-2"
                         >
                             <AppButton
                                 class="btn btn-icon btn-primary"
@@ -46,9 +50,9 @@
 
                         <!-- edit role -->
                         <AppTooltip
-                            v-if="can('ACL: Role - Edit')"
+                            v-if="can('Acl: Role - Edit')"
                             :text="__('Edit Role')"
-                            class="mr-3"
+                            class="mr-2"
                         >
                             <AppButton
                                 class="btn btn-icon btn-primary"
@@ -64,12 +68,16 @@
 
                         <!-- delete role -->
                         <AppTooltip
-                            v-if="can('ACL: Role - Delete')"
+                            v-if="can('Acl: Role - Delete')"
                             :text="__('Delete Role')"
                         >
                             <AppButton
                                 class="btn btn-icon btn-destructive"
-                                @click="validateRoleDeletion(item.id)"
+                                @click="
+                                    confirmDelete(
+                                        route('aclRole.destroy', item.id)
+                                    )
+                                "
                             >
                                 <i class="ri-delete-bin-line"></i>
                             </AppButton>
@@ -82,6 +90,9 @@
 
     <AppPaginator
         :links="roles.links"
+        :from="roles.from || 0"
+        :to="roles.to || 0"
+        :total="roles.total || 0"
         class="mt-4 justify-center"
     ></AppPaginator>
 
@@ -90,19 +101,15 @@
     </AppAlert>
 
     <AppConfirmDialog ref="confirmDialogRef"></AppConfirmDialog>
-
-    <AppToast ref="toastRef">
-        <AppAlert type="error" class="mb-4">
-            It's a demo, please don't delete the root role...
-        </AppAlert>
-    </AppToast>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import useAuthCan from '@/Composables/useAuthCan'
 
-const props = defineProps({
+const { can } = useAuthCan()
+
+defineProps({
     roles: {
         type: Object,
         default: () => {}
@@ -114,22 +121,10 @@ const breadCrumb = [
     { label: 'Roles', last: true }
 ]
 
-const headers = ['Name', 'Actions']
+const headers = ['ID', 'Name', 'Actions']
 
 const confirmDialogRef = ref(null)
 const confirmDelete = (deleteRoute) => {
     confirmDialogRef.value.openModal(deleteRoute)
 }
-
-const toastRef = ref(null)
-const validateRoleDeletion = (roleId) => {
-    //root role, should not be deleted
-    if (roleId === 1) {
-        toastRef.value.open()
-    } else {
-        confirmDelete(route('aclRole.destroy', roleId))
-    }
-}
-
-const { can } = useAuthCan()
 </script>

@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+import tailwindcss from '@tailwindcss/vite'
 import laravel from 'laravel-vite-plugin'
 import vue from '@vitejs/plugin-vue'
 
@@ -7,9 +8,19 @@ import AppComponentsResolver from './resources/js/Resolvers/AppComponentsResolve
 
 export default defineConfig({
     plugins: [
+        tailwindcss(),
         laravel({
-            input: 'resources/js/app.js',
-            refresh: true
+            input: [
+                'resources/js/app.js',
+                'resources-site/js/index-app.js',
+                'resources-site/css/site.css',
+                'resources-site/js/blog-app.js'
+            ],
+            refresh: [
+                'resources/**/*',
+                'resources-site/**/*',
+                'modules/**/views/**/*.blade.php'
+            ]
         }),
         vue({
             template: {
@@ -25,7 +36,8 @@ export default defineConfig({
     ],
     resolve: {
         alias: {
-            '@resources': '/resources'
+            '@resources': '/resources',
+            '@resourcesSite': '/resources-site'
         }
     }
 })

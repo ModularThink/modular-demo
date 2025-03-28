@@ -9,13 +9,13 @@
 </template>
 
 <script setup>
-import useFormErrors from '@/Composables/useFormErrors'
 import useFormContext from '@/Composables/useFormContext'
 import { usePostStore } from '../PostStore'
+
 const postStore = usePostStore()
-const { errorsFields } = useFormErrors()
 
 const { isCreate } = useFormContext()
+
 const getImagePreviewURL = () => {
     if (!isCreate.value && postStore.post.image_url) {
         return postStore.post.image_url

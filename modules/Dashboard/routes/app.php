@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Dashboard\Http\Controllers\DashboardController;
 
 Route::get('/dashboard', [
-    'uses' => 'DashboardController@index',
-])
-    ->name('dashboard.index')
-    ->can('Dashboard');
+    DashboardController::class, 'index',
+])->name('dashboard.index');

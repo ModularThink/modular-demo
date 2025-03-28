@@ -1,65 +1,57 @@
 <template>
-    <div class="mx-8 mt-4">
-        <h1 class="py-6 text-2xl">Welcome to the Modular Demo App!</h1>
+    <Head title="Dashboard"></Head>
+    <div
+        class="border-neutral-4 bg-neutral-2 mt-6 flex flex-col justify-between rounded-md border px-4 py-2 shadow-2xs md:flex-row"
+    >
+        <div>
+            <i class="ri-megaphone-line"></i>
+            Welcome
+            <span class="font-bold">{{ $page.props.auth.user.name }}</span> !
+        </div>
+    </div>
 
-        <p class="mt-4">
-            This demo app is designed to help illustrate how the different parts
-            of a
-            <a
-                href="https://docs.ismodular.com"
-                class="text-skin-primary-9 hover:text-skin-primary-10"
-                target="_blank"
-                >Modular <i class="ri-external-link-line"></i
-            ></a>
-            Project work together:
-        </p>
+    <div class="my-6 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <!-- User Count Card -->
+        <DashboardCard
+            v-if="can('Acl')"
+            link="user.index"
+            label="Users"
+            :count="props.count.users"
+            icon="ri-user-line"
+            color="info"
+        ></DashboardCard>
 
-        <ul class="mt-6">
-            <li class="mb-3">
-                <i class="ri-check-line"></i>
-                The ACL (Access Control List) System.
-            </li>
+        <!-- Role Count Card -->
+        <DashboardCard
+            v-if="can('Acl')"
+            link="aclRole.index"
+            label="Roles"
+            :count="props.count.roles"
+            icon="ri-account-box-line"
+            color="warning"
+        ></DashboardCard>
 
-            <li class="mb-3">
-                <i class="ri-check-line"></i>
-                Some of the Custom Vue 3 Components, provided by Modular
-                (Templates, Sidebar, Data Table, Form Components, Integrated
-                Text Editor, Flash Messages, etc).
-            </li>
-
-            <li class="mb-3">
-                <i class="ri-check-line"></i>
-                How Laravel, Vue and Inertia.js communicate with each other.
-            </li>
-
-            <li class="mb-3">
-                <i class="ri-check-line"></i>
-                A possible way to organize the file structure of a Modular
-                Project.
-            </li>
-
-            <li class="mb-3">
-                <i class="ri-check-line"></i>
-                Smooth transitions between pages.
-            </li>
-
-            <li class="mb-3">
-                <i class="ri-check-line"></i>
-                The
-                <a
-                    href="https://github.com/daniel-cintra/modular-demo"
-                    target="_blank"
-                    class="text-skin-primary-9 hover:text-skin-primary-10"
-                >
-                    GitHub repository <i class="ri-external-link-line"></i>
-                </a>
-
-                for this demo app includes examples of workflows (GitHub
-                Actions) to standardize the styles of the PHP files using
-                Laravel Pint, and the Vue and JavaScript files using Prettier.
-                There is also a workflow to handle tests. Feel free to check it
-                out!
-            </li>
-        </ul>
+        <!-- Permission Count Card -->
+        <DashboardCard
+            v-if="can('Acl')"
+            link="aclPermission.index"
+            label="Permissions"
+            :count="props.count.permissions"
+            icon="ri-shield-keyhole-line"
+            color="success"
+        ></DashboardCard>
     </div>
 </template>
+<script setup>
+import { Head } from '@inertiajs/vue3'
+import useAuthCan from '@/Composables/useAuthCan'
+import DashboardCard from '@/Pages/Dashboard/Components/DashboardCard.vue'
+
+const { can } = useAuthCan()
+
+const props = defineProps({
+    count: {
+        type: Object
+    }
+})
+</script>

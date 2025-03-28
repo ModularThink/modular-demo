@@ -9,15 +9,15 @@ trait FileNameGenerator
 {
     private function getFileName(UploadedFile $file, string $readableName, string $nameStrategy): string
     {
-        if ($nameStrategy === 'original') {
+        if ($nameStrategy == 'original') {
             return Str::slug($readableName).'.'.$file->getClientOriginalExtension();
         }
 
-        if ($nameStrategy === 'originalUUID') {
+        if ($nameStrategy == 'originalUUID') {
             return Str::slug($readableName).'-'.Str::uuid().'.'.$file->getClientOriginalExtension();
         }
 
-        if ($nameStrategy === 'hash') {
+        if ($nameStrategy == 'hash') {
             return $file->hashName();
         }
     }

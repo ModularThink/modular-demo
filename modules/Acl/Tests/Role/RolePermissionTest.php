@@ -10,20 +10,20 @@ use Tests\TestCase;
 uses(TestCase::class, RefreshDatabase::class);
 
 beforeEach(function () {
+    $this->role = Role::create(['name' => 'root']);
     $this->user = User::factory()->create();
-    $this->role = Role::create(['name' => 'root', 'guard_name' => 'user']);
-    $this->user->assignRole('root');
 
-    $this->loggedRequest = $this->actingAs($this->user);
-
-    $this->permission = Permission::create(['name' => 'first', 'guard_name' => 'user']);
-    $this->permission2 = Permission::create(['name' => 'second', 'guard_name' => 'user']);
+    $this->permission = Permission::create(['name' => 'first']);
+    $this->permission2 = Permission::create(['name' => 'second']);
 
     $this->role->syncPermissions([$this->permission->id]);
+    $this->user->assignRole($this->role);
+
+    $this->loggedRequest = $this->actingAs($this->user);
 });
 
 test('role permissions can be rendered', function () {
-    $response = $this->loggedRequest->get('/acl-role-permission/'.$this->role->id.'/edit');
+    $response = $this->loggedRequest->get('/admin/acl-role-permission/'.$this->role->id.'/edit');
 
     $response->assertStatus(200);
 
@@ -51,11 +51,11 @@ test('role permissions can be rendered', function () {
 });
 
 test('role permissions can be updated', function () {
-    $response = $this->loggedRequest->put('/acl-role-permission/'.$this->role->id, [
+    $response = $this->loggedRequest->put('/admin/acl-role-permission/'.$this->role->id, [
         'rolePermissions' => [$this->permission2->id],
     ]);
 
-    $response->assertRedirect('/acl-role');
+    $response->assertRedirect('/admin/acl-role');
 
     $role = Role::with(['permissions' => function ($q) {
         $q->get(['id', 'name']);

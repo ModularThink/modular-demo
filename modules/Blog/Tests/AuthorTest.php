@@ -27,7 +27,7 @@ afterEach(function () {
 });
 
 test('author list can be rendered', function () {
-    $response = $this->loggedRequest->get('/blog-author');
+    $response = $this->loggedRequest->get('/admin/blog-author');
 
     $response->assertStatus(200);
 
@@ -49,7 +49,7 @@ test('author list can be rendered', function () {
 });
 
 test('author create page can be rendered', function () {
-    $response = $this->loggedRequest->get('/blog-author/create');
+    $response = $this->loggedRequest->get('/admin/blog-author/create');
 
     $response->assertStatus(200);
 
@@ -60,7 +60,7 @@ test('author create page can be rendered', function () {
 });
 
 test('author can be created', function () {
-    $response = $this->loggedRequest->post('/blog-author', [
+    $response = $this->loggedRequest->post('/admin/blog-author', [
         'name' => 'New Name',
         'bio' => 'New Bio',
         'email' => 'new@email.com',
@@ -70,13 +70,13 @@ test('author can be created', function () {
 
     $authors = Author::all();
 
-    $response->assertRedirect('/blog-author');
+    $response->assertRedirect('/admin/blog-author');
     $this->assertCount(2, $authors);
     $this->assertEquals('New Name', $authors->last()->name);
 });
 
 test('author edit page can be rendered', function () {
-    $response = $this->loggedRequest->get('/blog-author/'.$this->author->id.'/edit');
+    $response = $this->loggedRequest->get('/admin/blog-author/'.$this->author->id.'/edit');
 
     $response->assertStatus(200);
 
@@ -99,14 +99,14 @@ test('author edit page can be rendered', function () {
 });
 
 test('author can be updated', function () {
-    $response = $this->loggedRequest->put('/blog-author/'.$this->author->id, [
+    $response = $this->loggedRequest->put('/admin/blog-author/'.$this->author->id, [
         'name' => 'New Name',
         'email' => 'new@email.com',
     ]);
 
-    $response->assertRedirect('/blog-author');
+    $response->assertRedirect('/admin/blog-author');
 
-    $redirectResponse = $this->loggedRequest->get('/blog-author');
+    $redirectResponse = $this->loggedRequest->get('/admin/blog-author');
     $redirectResponse->assertInertia(
         fn (Assert $page) => $page
             ->component('BlogAuthor/AuthorIndex')
@@ -125,9 +125,9 @@ test('author can be updated', function () {
 });
 
 test('author can be deleted', function () {
-    $response = $this->loggedRequest->delete('/blog-author/'.$this->user->id);
+    $response = $this->loggedRequest->delete('/admin/blog-author/'.$this->user->id);
 
-    $response->assertRedirect('/blog-author');
+    $response->assertRedirect('/admin/blog-author');
 
     $this->assertCount(0, Author::all());
 });

@@ -80,7 +80,17 @@
             </form>
         </template>
         <template #footer>
-            <AppButton class="btn btn-primary" @click="submitForm">
+            <AppButton
+                v-if="
+                    can(
+                        isCreate
+                            ? 'Blog: Author - Create'
+                            : 'Blog: Author - Edit'
+                    )
+                "
+                class="btn btn-primary"
+                @click="submitForm"
+            >
                 {{ __('Save') }}
             </AppButton>
         </template>
@@ -89,6 +99,7 @@
 
 <script setup>
 import { useForm } from '@inertiajs/vue3'
+import useAuthCan from '@/Composables/useAuthCan'
 
 import useTitle from '@/Composables/useTitle'
 import useFormContext from '@/Composables/useFormContext'
@@ -109,6 +120,7 @@ const breadCrumb = [
 
 const { title } = useTitle('Author')
 const { isCreate } = useFormContext()
+const { can } = useAuthCan()
 
 const form = useForm({
     id: props.author ? props.author.id : null,

@@ -5,7 +5,7 @@
                 v-bind="$attrs"
                 type="radio"
                 :checked="isChecked"
-                class="h-4 w-4 text-skin-primary-9 hover:cursor-pointer focus:ring-2 focus:ring-skin-primary-7"
+                class="text-primary-9 focus:ring-primary-7 h-4 w-4 hover:cursor-pointer focus:ring-2"
                 @change="$emit('update:modelValue', value)"
             />
 
@@ -40,5 +40,5 @@ onMounted(() => {
     }
 })
 
-const emit = defineEmits(['update:modelValue'])
+defineEmits(['update:modelValue'])
 </script>

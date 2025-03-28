@@ -3,7 +3,7 @@
         <!-- Modal header -->
         <template #header>
             <div
-                class="flex items-center justify-between rounded-t border-b border-skin-neutral-6 p-5"
+                class="border-neutral-6 flex items-center justify-between rounded-t border-b p-5"
             >
                 <h3 class="text-xl font-semibold lg:text-2xl">
                     {{ __('Confirmation') }}
@@ -26,7 +26,7 @@
         <!-- Modal footer -->
         <template #footer>
             <div
-                class="flex items-center justify-end space-x-2 rounded-b border-t border-skin-neutral-6 p-5"
+                class="border-neutral-6 flex items-center justify-end space-x-2 rounded-b border-t p-5"
             >
                 <AppButton class="btn btn-neutral mr-3" @click="closeModal">
                     {{ __('No') }}

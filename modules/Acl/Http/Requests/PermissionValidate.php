@@ -2,7 +2,9 @@
 
 namespace Modules\Acl\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Modules\Support\Http\Requests\Request;
+use Spatie\Permission\Models\Permission;
 
 class PermissionValidate extends Request
 {
@@ -15,8 +17,13 @@ class PermissionValidate extends Request
     {
         return [
 
-            'name' => 'required|min:3|unique:permissions,name',
-            // 'guard_name' => 'required'
+            'name' => [
+                'required',
+                'string',
+                'min:3',
+                'max:255',
+                Rule::unique(Permission::class)->ignore($this->id),
+            ],
 
         ];
     }

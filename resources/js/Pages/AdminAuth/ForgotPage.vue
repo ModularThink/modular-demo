@@ -1,25 +1,26 @@
 <template>
+    <Head title="Forgot Password"></Head>
     <AppAuthShell>
         <AppAuthLogo />
 
-        <AppCard class="space-y-6 px-16">
+        <AppCard class="bg-neutral-2 w-80 space-y-2">
             <template #title>
-                <h3 class="text-2xl font-semibold tracking-tight">
+                <h3 class="px-2 py-3 text-lg font-semibold tracking-tight">
                     {{ __('Forgot your password?') }}
                 </h3>
             </template>
 
             <template #description>
-                <h2 class="mt-2">
+                <h2 class="px-2 text-sm leading-relaxed">
                     {{ __('Enter your email to reset your password.') }}
                 </h2>
             </template>
 
             <template #content>
-                <AppFormErrors class="mb-4" />
+                <AppFormErrors class="mb-4 px-2" />
 
                 <form>
-                    <div>
+                    <div class="px-2">
                         <AppLabel for="email">{{ __('Your Email') }}</AppLabel>
                         <AppInputText
                             id="email"
@@ -35,18 +36,22 @@
             </template>
 
             <template #footer>
-                <AppButton class="btn btn-primary" @click="submitForm">
-                    {{ __('Send') }}
-                </AppButton>
+                <div class="px-2">
+                    <AppButton
+                        class="btn btn-primary flex w-full justify-center"
+                        @click="submitForm"
+                    >
+                        {{ __('Send Password Reset Link') }}
+                    </AppButton>
+
+                    <p class="mt-3">
+                        <AppLink :href="route('adminAuth.loginForm')">
+                            {{ __('Back to Login') }}
+                        </AppLink>
+                    </p>
+                </div>
             </template>
         </AppCard>
-
-        <AppToast ref="toastRef">
-            <AppAlert type="warning" class="mb-4">
-                The Demo App version will not send the email to reset
-                passwords...
-            </AppAlert>
-        </AppToast>
     </AppAuthShell>
 </template>
 
@@ -59,7 +64,7 @@ export default {
 </script>
 
 <script setup>
-import { ref } from 'vue'
+import { Head } from '@inertiajs/vue3'
 import { useForm } from '@inertiajs/vue3'
 import useFormErrors from '@/Composables/useFormErrors'
 
@@ -67,12 +72,8 @@ const form = useForm({
     email: ''
 })
 
-const toastRef = ref(null)
-
 function submitForm() {
-    toastRef.value.close()
-    toastRef.value.open()
-    // form.post(route('adminAuth.sendResetLinkEmail'))
+    form.post(route('adminAuth.sendResetLinkEmail'))
 }
 
 const { errorsFields } = useFormErrors()

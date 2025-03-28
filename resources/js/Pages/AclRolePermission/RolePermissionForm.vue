@@ -5,7 +5,7 @@
     <AppCard>
         <template #title>
             {{ __('Role Permissions for') }}:
-            <span class="text-skin-primary-10">{{ role.name }}</span>
+            <span class="text-primary-10">{{ role.name }}</span>
         </template>
         <template #content>
             <div v-if="chunks.length">
@@ -27,7 +27,7 @@
                                 name="permission"
                                 :value="permission"
                             />
-                            <AppLabel :for="permission.name" class="ml-3">
+                            <AppLabel :for="permission.name" class="ml-2">
                                 {{ permission.name }}
                             </AppLabel>
                         </div>
@@ -40,19 +40,10 @@
             </AppAlert>
         </template>
 
-        <template #footer>
-            <AppButton
-                v-if="role.id && role.id !== 1 && chunks.length"
-                class="btn btn-primary"
-                @click="submitForm"
-            >
+        <template v-if="chunks.length" #footer>
+            <AppButton class="btn btn-primary" @click="submitForm">
                 {{ __('Save') }}
             </AppButton>
-
-            <AppAlert v-else type="info" class="mb-4">
-                The 'root' role will always have all permissions associated and
-                cannot be changed. There is no need to manually update them.
-            </AppAlert>
         </template>
     </AppCard>
 </template>

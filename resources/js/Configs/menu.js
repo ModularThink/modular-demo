@@ -1,5 +1,3 @@
-import { ZiggyVue } from '/vendor/tightenco/ziggy/dist/vue.m'
-
 export default {
     // main navigation - side menu
     items: [
@@ -27,6 +25,12 @@ export default {
                     link: route('blogCategory.index')
                 },
                 {
+                    label: 'Tags',
+                    permission: 'Blog: Tag - List',
+                    icon: 'ri-price-tag-3-line',
+                    link: route('blogTag.index')
+                },
+                {
                     label: 'Authors',
                     permission: 'Blog: Author - List',
                     icon: 'ri-team-line',
@@ -37,7 +41,7 @@ export default {
 
         {
             label: 'Access Control List',
-            permission: 'ACL',
+            permission: 'Acl',
             children: [
                 {
                     label: 'Users',

@@ -38,7 +38,7 @@ class PasswordResetLinkController extends AppController
             $request->only('email')
         );
 
-        return $status === Password::broker('usersModule')::RESET_LINK_SENT
+        return $status == Password::broker('usersModule')::RESET_LINK_SENT
             ? back()->with('success', __($status))
             : back()->withInput($request->only('email'))
                 ->withErrors(['email' => __($status)]);

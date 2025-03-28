@@ -3,7 +3,7 @@
         <input
             :value="modelValue"
             v-bind="$attrs"
-            class="mt-1 block w-full rounded-md border-0 bg-skin-neutral-1 px-3 py-2 text-skin-neutral-12 placeholder-skin-neutral-6 shadow-sm ring-1 ring-inset ring-skin-neutral-7 focus:ring-2 focus:ring-inset focus:ring-skin-neutral-7 sm:text-sm sm:leading-6"
+            class="bg-neutral-1 text-neutral-12 placeholder-neutral-6 ring-neutral-7 focus:ring-neutral-7 mt-1 block w-full rounded-md border-0 px-3 py-2 ring-1 shadow-xs ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
             :type="inputType"
             @input="$emit('update:modelValue', $event.target.value)"
         />
@@ -23,7 +23,7 @@
 <script setup>
 import { ref } from 'vue'
 
-const props = defineProps({
+defineProps({
     modelValue: {
         type: String,
         required: true
@@ -43,5 +43,5 @@ const toggleInput = () => {
         eyeIcon.value === 'ri-eye-line' ? 'ri-eye-off-line' : 'ri-eye-line'
 }
 
-const emit = defineEmits(['update:modelValue'])
+defineEmits(['update:modelValue'])
 </script>

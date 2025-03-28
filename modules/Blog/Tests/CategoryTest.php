@@ -28,7 +28,7 @@ afterEach(function () {
 });
 
 test('category list can be rendered', function () {
-    $response = $this->loggedRequest->get('/blog-category');
+    $response = $this->loggedRequest->get('/admin/blog-category');
 
     $response->assertStatus(200);
 
@@ -48,7 +48,7 @@ test('category list can be rendered', function () {
 });
 
 test('category create page can be rendered', function () {
-    $response = $this->loggedRequest->get('/blog-category/create');
+    $response = $this->loggedRequest->get('/admin/blog-category/create');
 
     $response->assertStatus(200);
 
@@ -59,7 +59,7 @@ test('category create page can be rendered', function () {
 });
 
 test('category can be created', function () {
-    $response = $this->loggedRequest->post('/blog-category', [
+    $response = $this->loggedRequest->post('/admin/blog-category', [
         'name' => 'Name',
         'description' => 'Description',
         'is_visible' => true,
@@ -69,13 +69,13 @@ test('category can be created', function () {
 
     $categories = Category::all();
 
-    $response->assertRedirect('/blog-category');
+    $response->assertRedirect('/admin/blog-category');
     $this->assertCount(2, $categories);
     $this->assertEquals('Name', $categories->last()->name);
 });
 
 test('category edit page can be rendered', function () {
-    $response = $this->loggedRequest->get('/blog-category/'.$this->category->id.'/edit');
+    $response = $this->loggedRequest->get('/admin/blog-category/'.$this->category->id.'/edit');
 
     $response->assertStatus(200);
 
@@ -99,14 +99,14 @@ test('category edit page can be rendered', function () {
 });
 
 test('category can be updated', function () {
-    $response = $this->loggedRequest->put('/blog-category/'.$this->category->id, [
+    $response = $this->loggedRequest->put('/admin/blog-category/'.$this->category->id, [
         'name' => 'New Name',
         'is_visible' => true,
     ]);
 
-    $response->assertRedirect('/blog-category');
+    $response->assertRedirect('/admin/blog-category');
 
-    $redirectResponse = $this->loggedRequest->get('/blog-category');
+    $redirectResponse = $this->loggedRequest->get('/admin/blog-category');
     $redirectResponse->assertInertia(
         fn (Assert $page) => $page
             ->component('BlogCategory/CategoryIndex')
@@ -123,9 +123,9 @@ test('category can be updated', function () {
 });
 
 test('category can be deleted', function () {
-    $response = $this->loggedRequest->delete('/blog-category/'.$this->user->id);
+    $response = $this->loggedRequest->delete('/admin/blog-category/'.$this->user->id);
 
-    $response->assertRedirect('/blog-category');
+    $response->assertRedirect('/admin/blog-category');
 
     $this->assertCount(0, Category::all());
 });

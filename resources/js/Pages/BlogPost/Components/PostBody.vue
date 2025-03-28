@@ -22,6 +22,18 @@
             :file-upload-url="route('blogPost.uploadEditorImage')"
         />
     </div>
+
+    <div class="mt-5">
+        <AppLabel for="notes">Summary</AppLabel>
+        <AppTipTapEditor
+            v-model="postStore.post.summary"
+            editor-id="summary"
+            :class="{
+                'app-tip-tap-error': errorsFields.includes('summary')
+            }"
+            :file-upload-url="route('blogPost.uploadEditorImage')"
+        />
+    </div>
 </template>
 
 <script setup>

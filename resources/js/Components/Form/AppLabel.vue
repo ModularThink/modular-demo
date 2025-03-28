@@ -1,3 +1,3 @@
 <template>
-    <label class="block font-medium" :class="$attrs.class"><slot></slot></label>
+    <label class="block text-md" :class="$attrs.class"><slot></slot></label>
 </template>

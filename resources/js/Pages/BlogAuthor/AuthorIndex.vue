@@ -33,13 +33,13 @@
 
                     <AppDataTableData>
                         {{ item.name }}<br />
-                        <small class="text-sm text-skin-neutral-9">{{
+                        <small class="text-neutral-9 text-sm">{{
                             item.email
                         }}</small>
                     </AppDataTableData>
 
                     <AppDataTableData>
-                        <small class="text-sm text-skin-neutral-9">
+                        <small class="text-neutral-9 text-sm">
                             <i class="ri-github-fill mr-0 h-5 w-5"></i>
                             {{ item.github_handle }}<br />
                             <i class="ri-twitter-x-line mr-1 h-5 w-5"></i
@@ -90,6 +90,9 @@
 
     <AppPaginator
         :links="authors.links"
+        :from="authors.from || 0"
+        :to="authors.to || 0"
+        :total="authors.total || 0"
         class="mt-4 justify-center"
     ></AppPaginator>
 
@@ -103,8 +106,9 @@
 <script setup>
 import { ref } from 'vue'
 import useAuthCan from '@/Composables/useAuthCan'
+import AppImageNotAvailable from '@/Components/Modules/Blog/AppImageNotAvailable.vue'
 
-const props = defineProps({
+defineProps({
     authors: {
         type: Object,
         default: () => {}

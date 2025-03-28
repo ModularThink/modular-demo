@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full bg-skin-base">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    {{-- If using SSL/HTTPS: Enforces loading all resources over HTTPS, upgrading requests from HTTP to HTTPS for enhanced security --}}
-    @env('production')
-        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    @endenv
+    {{-- If developing using SSL/HTTPS (uncomment the line below): Enforces loading all resources over HTTPS, upgrading requests from HTTP to HTTPS for enhanced security --}}
+    {{-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> --}}
 
     <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
@@ -26,7 +24,7 @@
     @inertiaHead
 </head>
 
-<body class="font-sans antialiased h-full">
+<body class="h-full font-sans antialiased">
     @inertia
 
     <x-modular-translations></x-modular-translations>

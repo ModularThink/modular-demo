@@ -3,7 +3,7 @@
     <input
         v-if="isBooleanType"
         type="checkbox"
-        class="text-skin-primary h-4 w-4 rounded focus:ring-2"
+        class="text-primary h-4 w-4 rounded-sm focus:ring-2"
         v-bind="$attrs"
         :checked="modelValue"
         @change="updateBooleanValue"
@@ -13,7 +13,7 @@
     <input
         v-else
         type="checkbox"
-        class="text-skin-primary h-4 w-4 rounded focus:ring-2"
+        class="text-primary h-4 w-4 rounded-sm focus:ring-2"
         v-bind="$attrs"
         :value="value"
         :checked="isChecked"

@@ -1,0 +1,27 @@
+.blog-post-content {
+    @apply text-neutral-11 leading-relaxed;
+}
+
+.blog-post-content h1 {
+    @apply mt-8 mb-4 text-3xl font-semibold;
+}
+
+.blog-post-content h2 {
+    @apply mt-8 mb-4 text-2xl font-semibold;
+}
+
+.blog-post-content h3 {
+    @apply mt-8 mb-4 text-xl font-semibold;
+}
+
+.blog-post-content p {
+    @apply mb-6 text-base leading-relaxed tracking-normal;
+}
+
+.blog-post-content img {
+    @apply mt-4 mb-8 rounded-lg shadow-lg;
+}
+
+.blog-post-content a {
+    @apply text-primary-9 hover:underline;
+}

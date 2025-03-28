@@ -27,7 +27,7 @@ afterEach(function () {
 });
 
 test('post list can be rendered', function () {
-    $response = $this->loggedRequest->get('/blog-post');
+    $response = $this->loggedRequest->get('/admin/blog-post');
 
     $response->assertStatus(200);
 
@@ -47,7 +47,7 @@ test('post list can be rendered', function () {
 });
 
 test('post create page can be rendered', function () {
-    $response = $this->loggedRequest->get('/blog-post/create');
+    $response = $this->loggedRequest->get('/admin/blog-post/create');
 
     $response->assertStatus(200);
 
@@ -58,10 +58,11 @@ test('post create page can be rendered', function () {
 });
 
 test('post can be created', function () {
-    $response = $this->loggedRequest->post('/blog-post', [
+    $response = $this->loggedRequest->post('/admin/blog-post', [
         'blog_author_id' => null,
         'blog_category_id' => null,
         'title' => 'Post Title',
+        'summary' => 'Post Summary',
         'content' => 'Post Content',
         'image' => null,
         'meta_tag_title' => 'Post Title Tag',
@@ -71,13 +72,13 @@ test('post can be created', function () {
 
     $posts = Post::all();
 
-    $response->assertRedirect('/blog-post');
+    $response->assertRedirect('/admin/blog-post');
     $this->assertCount(2, $posts);
     $this->assertEquals('Post Title', $posts->last()->title);
 });
 
 test('post edit page can be rendered', function () {
-    $response = $this->loggedRequest->get('/blog-post/'.$this->post->id.'/edit');
+    $response = $this->loggedRequest->get('/admin/blog-post/'.$this->post->id.'/edit');
 
     $response->assertStatus(200);
 
@@ -92,30 +93,33 @@ test('post edit page can be rendered', function () {
                     ->where('blog_category_id', $this->post->blog_category_id)
                     ->where('title', $this->post->title)
                     ->where('slug', $this->post->slug)
+                    ->where('summary', $this->post->summary)
                     ->where('content', $this->post->content)
                     ->where('image', $this->post->image)
                     ->where('image_url', $this->post->image_url)
                     ->where('meta_tag_title', $this->post->meta_tag_title)
                     ->where('meta_tag_description', $this->post->meta_tag_description)
-                    ->where('published_at', $this->post->published_at->format('Y-m-d H:i:s'))
+                    ->where('tags', [])
+                    ->where('published_at', $this->post->published_at->toDateString())
             )
     );
 });
 
 test('post can be updated', function () {
-    $response = $this->loggedRequest->put('/blog-post/'.$this->post->id, [
+    $response = $this->loggedRequest->put('/admin/blog-post/'.$this->post->id, [
         'blog_author_id' => null,
         'blog_category_id' => null,
         'title' => 'New Post Title',
+        'summary' => 'Post Summary',
         'content' => 'Post Content',
         'meta_tag_title' => 'Post Title Tag',
         'meta_tag_description' => 'Post Description Tag',
         'published_at' => '2023-12-13',
     ]);
 
-    $response->assertRedirect('/blog-post');
+    $response->assertRedirect('/admin/blog-post');
 
-    $redirectResponse = $this->loggedRequest->get('/blog-post');
+    $redirectResponse = $this->loggedRequest->get('/admin/blog-post');
     $redirectResponse->assertInertia(
         fn (Assert $page) => $page
             ->component('BlogPost/PostIndex')
@@ -132,9 +136,9 @@ test('post can be updated', function () {
 });
 
 test('post can be deleted', function () {
-    $response = $this->loggedRequest->delete('/blog-post/'.$this->user->id);
+    $response = $this->loggedRequest->delete('/admin/blog-post/'.$this->user->id);
 
-    $response->assertRedirect('/blog-post');
+    $response->assertRedirect('/admin/blog-post');
 
     $this->assertCount(0, Post::all());
 });

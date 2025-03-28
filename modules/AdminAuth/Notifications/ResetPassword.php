@@ -12,9 +12,7 @@ class ResetPassword extends Notification
      *
      * @param  string  $token
      */
-    public function __construct(public $token)
-    {
-    }
+    public function __construct(public $token) {}
 
     /**
      * Get the notification's delivery channels.
@@ -38,7 +36,7 @@ class ResetPassword extends Notification
             'email' => $notifiable->getEmailForPasswordReset(),
         ];
 
-        return (new MailMessage())->markdown(
+        return (new MailMessage)->markdown(
             'admin-auth::emails.reset-password',
             [
                 'url' => url(route('adminAuth.resetPasswordForm', $params, false)),
