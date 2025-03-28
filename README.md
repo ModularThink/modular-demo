@@ -94,13 +94,7 @@ Build the assets:
 npm run build
 ```
 
-Run the dev server (the output will give the address):
-
-```sh
-php artisan serve
-```
-
-You're ready to go! Simply visit the URL in your browser; the login form will appear with the fields automatically filled in.
+You're ready to go! Simply visit the URL configured in your `.env` file in your browser; the login form will appear with the fields automatically filled in.
 
 ## Hot Reloading
 
@@ -109,14 +103,6 @@ If you want to use hot reloading, to see the changes in the browser without havi
 ```sh
 npm run dev
 ```
-
-And run the following command in a separate terminal window:
-
-```sh
-php artisan serve
-```
-
-Access the application (in your browser) at the address given by the `php artisan serve` command.
 
 ## Tests
 
