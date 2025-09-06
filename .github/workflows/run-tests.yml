@@ -24,7 +24,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 'v19.7.0'
+          node-version: 'v22.17.0'
 
       - name: Run composer install
         run: composer install -n --prefer-dist
