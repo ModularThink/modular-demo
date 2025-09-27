@@ -2,11 +2,15 @@
 
 # Clone the project
 
-`git clone https://github.com/daniel-cintra/modular-demo.git && cd modular-demo`
+```bash
+git clone https://github.com/daniel-cintra/modular-demo.git && cd modular-demo`
+```
 
 # Create the .env file
 
-`mv .env.example .env`
+```bash
+mv .env.example .env
+```
 
 # Install the dependencies
 
@@ -32,11 +36,15 @@ docker run --rm \
 
 # Start sail
 
-`./vendor/bin/sail up -d`
+```bash
+./vendor/bin/sail up -d
+```
 
 # SSH into the container
 
-`./vendor/bin/sail shell`
+```bash
+./vendor/bin/sail shell
+```
 
 # Follow the install instructions normally
 
