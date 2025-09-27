@@ -34,6 +34,18 @@ docker run --rm \
  php artisan sail:install
 ```
 
+By default the command above will set in the `.env`:
+
+```bash
+DB_CONNECTION=mysql
+```
+
+For the sake of simplicity, we will use SQLite. So, we need to change the `DB_CONNECTION` to `sqlite`.
+
+```bash
+DB_CONNECTION=sqlite
+```
+
 # Start sail
 
 ```bash
