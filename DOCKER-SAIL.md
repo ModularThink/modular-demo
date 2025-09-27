@@ -40,10 +40,14 @@ By default the command above will set in the `.env`:
 DB_CONNECTION=mysql
 ```
 
-For the sake of simplicity, we will use SQLite. So, we need to change the `DB_CONNECTION` to `sqlite`.
+For the sake of simplicity, we will use SQLite. So, we need:
+
+1. To change the `DB_CONNECTION` to `sqlite`.
+2. Uncomment the `DB_DATABASE` path.
 
 ```bash
 DB_CONNECTION=sqlite
+DB_DATABASE=/var/www/html/database/database.sqlite
 ```
 
 # Start sail
