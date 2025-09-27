@@ -34,6 +34,8 @@ And the Blog Demo PreviewApp at [https://demo.ismodular.com/blog](https://demo.i
 
 ## Installation
 
+If you want to use Docker/Sail, please follow the [installation instructions](/DOCKER-SAIL.md) first. Otherwise, follow the instructions below.
+
 Clone the repo locally:
 
 ```sh
