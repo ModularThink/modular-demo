@@ -3,7 +3,7 @@
 # Clone the project
 
 ```bash
-git clone https://github.com/daniel-cintra/modular-demo.git && cd modular-demo`
+git clone https://github.com/daniel-cintra/modular-demo.git && cd modular-demo
 ```
 
 # Create the .env file
