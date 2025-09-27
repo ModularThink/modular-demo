@@ -23,17 +23,6 @@ docker run --rm \
  composer install
 ```
 
-# Sail scaffolding install
-
-```bash
-docker run --rm \
- -u "$(id -u):$(id -g)" \
- -v "$(pwd):/var/www/html" \
- -w /var/www/html \
- laravelsail/php84-composer:latest \
- php artisan sail:install
-```
-
 # Start sail
 
 ```bash
