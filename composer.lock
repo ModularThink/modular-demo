@@ -352,26 +352,26 @@
         },
         {
             "name": "daniel-cintra/modular-blog",
-            "version": "v0.4.4",
+            "version": "v0.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ModularThink/modular-blog.git",
-                "reference": "ea4c56cdb03e3621fb66b1927ff33d18ba44f460"
+                "reference": "ce38fcc2fb7358b4f8b26773b5264a687cd28167"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ModularThink/modular-blog/zipball/ea4c56cdb03e3621fb66b1927ff33d18ba44f460",
-                "reference": "ea4c56cdb03e3621fb66b1927ff33d18ba44f460",
+                "url": "https://api.github.com/repos/ModularThink/modular-blog/zipball/ce38fcc2fb7358b4f8b26773b5264a687cd28167",
+                "reference": "ce38fcc2fb7358b4f8b26773b5264a687cd28167",
                 "shasum": ""
             },
             "require": {
                 "cviebrock/eloquent-sluggable": "^12.0",
-                "daniel-cintra/modular": "^0.4.18"
+                "daniel-cintra/modular": "^0.4.20"
             },
             "require-dev": {
                 "laravel/pint": "^1.24",
                 "orchestra/testbench": "^10.0",
-                "pestphp/pest": "^4.0",
+                "pestphp/pest": "^4.1",
                 "pestphp/pest-plugin-laravel": "^4.0"
             },
             "type": "library",
@@ -407,9 +407,9 @@
             ],
             "support": {
                 "issues": "https://github.com/ModularThink/modular-blog/issues",
-                "source": "https://github.com/ModularThink/modular-blog/tree/v0.4.4"
+                "source": "https://github.com/ModularThink/modular-blog/tree/v0.4.5"
             },
-            "time": "2025-09-06T21:07:03+00:00"
+            "time": "2026-01-28T22:08:42+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
